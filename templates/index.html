@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Task Manager</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Task Manager</h1>
+
+    <p class="subtitle">
+        Manage your study tasks easily
+    </p>
+
+    <form action="/add" method="POST">
+
+        <input
+            type="text"
+            name="title"
+            placeholder="Enter a new task..."
+            required
+        >
+
+        <button type="submit">
+            Add Task
+        </button>
+
+    </form>
+
+    <div class="task-list">
+
+        {% for task in tasks %}
+
+        <div class="task">
+
+            <span class="{% if task.done %}completed{% endif %}">
+                {{ task.title }}
+            </span>
+
+            <div>
+
+                <a class="complete"
+                   href="/complete/{{ task.id }}">
+                    Done
+                </a>
+
+                <a class="delete"
+                   href="/delete/{{ task.id }}">
+                    Delete
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <footer>
+        CSI2113 Cloud Computing & DevOps
+    </footer>
+
+</div>
+
+</body>
+</html>
